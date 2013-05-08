@@ -87,7 +87,9 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
             };
             TweenLite.to(this.el, speeds.fast/1000, {css:{
                     opacity : 0,
-                    right   : this.el.offsetWidth*-1
+                    right   : this.el.offsetWidth*-1,
+                    rotation  : -8,
+                    y         : 12
                 },
                 onComplete : this.fn,
                 ease : easing.gsap.origin
@@ -130,7 +132,6 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
             that.close();
         });
 
-        console.log(speeds);
         TweenLite.to(this.el, speeds.fast/1000, {
             css:{
                 opacity : 1,

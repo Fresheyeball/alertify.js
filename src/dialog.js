@@ -231,23 +231,35 @@ define(["alertify", "element", "validate", "transition", "keys"], function (Aler
         };
 
         open = function (fromQueue) {
-            var item = queue[0],
-                onTransitionEnd;
+            var item = queue[0];
 
             isOpen = true;
 
-            onTransitionEnd = function (event) {
-                event.stopPropagation();
-                setFocus();
-                Alertify.off(this, transition.type, onTransitionEnd);
-            };
+            console.log('shockazooloo', clsCoverShow, clsElShow);
 
-            if (transition.supported && !fromQueue) {
-                Alertify.on(dialog.el, transition.type, onTransitionEnd);
-            }
             dialog.el.innerHTML    = build(item);
             dialog.cover.className = clsCoverShow;
             dialog.el.className    = clsElShow;
+
+            TweenLite.to(dialog.cover, speeds.fast, {
+                css:{
+                    opacity:1
+                },
+                ease : easing.gsap.origin
+            });
+
+            TweenLite.to(dialog.el, speeds.fast, {
+                css :{
+                    opacity:1,
+                    y:0
+                },
+                ease : easing.gsap.heavy,
+                onComplete : function(){
+                    if(!fromQueue){
+                        setFocus()
+                    }
+                }
+            });
 
             controls.reset  = Alertify.get("alertify-resetFocus");
             controls.ok     = Alertify.get("alertify-ok")     || undefined;
