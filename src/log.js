@@ -1,4 +1,4 @@
-define(["alertify", "validate", "element", "transition"], function (Alertify, validate, element, transition) {
+define(["alertify", "validate", "element"], function (Alertify, validate, element) {
     "use strict";
 
     var Log,
@@ -34,7 +34,7 @@ define(["alertify", "validate", "element", "transition"], function (Alertify, va
 
     /**
      * Animation End
-     * Handle CSS transition end
+     * event is fired by greensock
      *
      * @return {undefined}
      */

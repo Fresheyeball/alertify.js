@@ -665,7 +665,7 @@ var Log = (function () {
 
     /**
      * Animation End
-     * Handle CSS transition end
+     * event is fired by greensock
      *
      * @return {undefined}
      */
