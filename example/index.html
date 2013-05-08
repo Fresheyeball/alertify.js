@@ -364,7 +364,40 @@
         </div>
     </footer>
 
-    <script src="../dist/alertify.min.js"></script>
+    <!--CDN links for the latest TweenLite, CSSPlugin, and EasePack-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+
+    <script>
+        this.speeds = {
+            pregnant: 1618,
+            slow: 1000,
+            fast: 333,
+            pop: 50
+        };
+
+        /*
+         Note on easing. For whatever reason d3 easing is reversed,
+         d3 regards ease in's as ease out's. This is why it is inconsistent below:
+         */
+
+
+        this.easing = {
+            gsap: {
+                snap: Elastic.easeOut,
+                origin: Cubic.easeInOut,
+                heavy: Quad.easeOut
+            },
+            d3: {
+                snap: 'elastic-in',
+                origin: 'cubic-in-out',
+                heavy: 'quad-in'
+            }
+        };
+    </script>
+
+    <script src="../dist/alertify.js"></script>
     <script src="assets/js/lib/sh/shCore.js"></script>
     <script src="assets/js/lib/sh/shBrushJScript.js"></script>
     <script>

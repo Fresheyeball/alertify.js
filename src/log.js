@@ -2,11 +2,10 @@ define(["alertify", "validate", "element", "transition"], function (Alertify, va
     "use strict";
 
     var Log,
-        onTransitionEnd,
+        onAnimationEnd,
         remove,
         startTimer,
         prefix  = Alertify._prefix + "-log",
-        clsShow = prefix + " is-" + prefix + "-showing",
         clsHide = prefix + " is-" + prefix + "-hidden";
 
     /**
@@ -34,16 +33,13 @@ define(["alertify", "validate", "element", "transition"], function (Alertify, va
     };
 
     /**
-     * Transition End
+     * Animation End
      * Handle CSS transition end
      *
-     * @param  {Event} event Event
      * @return {undefined}
      */
-    onTransitionEnd = function (event) {
-        event.stopPropagation();
+    onAnimationEnd = function () {
         if (typeof this.el !== "undefined") {
-            Alertify.off(this.el, transition.type, this.fn);
             remove.call(this);
         }
     };
@@ -82,17 +78,21 @@ define(["alertify", "validate", "element", "transition"], function (Alertify, va
      * @return {undefined}
      */
     Log.prototype.close = function () {
+        console.log('close fired');
         var that = this;
         if (typeof this.el !== "undefined" && this.el.parentNode === this.parent) {
-            if (transition.supported) {
-                this.fn = function (event) {
-                    onTransitionEnd.call(that, event);
-                };
-                Alertify.on(this.el, transition.type, this.fn);
-                this.el.className = clsHide + " " + prefix + "-" + this.type;
-            } else {
-                remove.call(this);
-            }
+
+            this.fn = function() {
+                onAnimationEnd.call(that);
+            };
+            TweenLite.to(this.el, speeds.fast/1000, {css:{
+                    opacity : 0,
+                    right   : this.el.offsetWidth*-1
+                },
+                onComplete : this.fn,
+                ease : easing.gsap.origin
+            })
+
         }
     };
 
@@ -129,7 +129,17 @@ define(["alertify", "validate", "element", "transition"], function (Alertify, va
         Alertify.on(this.el, "click", function () {
             that.close();
         });
-        this.el.className = clsShow + " " + prefix + "-" + this.type;
+
+        console.log(speeds);
+        TweenLite.to(this.el, speeds.fast/1000, {
+            css:{
+                opacity : 1,
+                right   : 0
+            },
+            ease : easing.gsap.snap
+        });
+
+        //this.el.className = clsShow + " " + prefix + "-" + this.type;
         startTimer.call(this);
     };
 
