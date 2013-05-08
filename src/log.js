@@ -85,7 +85,8 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
             this.fn = function() {
                 onAnimationEnd.call(that);
             };
-            TweenLite.to(this.el, speeds.fast/1000, {css:{
+            TweenLite.to(this.el, speeds.fast/1000, {
+                css:{
                     opacity : 0,
                     right   : this.el.offsetWidth*-1,
                     rotation  : -8,
@@ -93,7 +94,8 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
                 },
                 onComplete : this.fn,
                 ease : easing.gsap.origin
-            })
+                }
+            )
 
         }
     };
@@ -138,7 +140,8 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
                 right   : 0
             },
             ease : easing.gsap.snap
-        });
+            }
+        );
 
         //this.el.className = clsShow + " " + prefix + "-" + this.type;
         startTimer.call(this);

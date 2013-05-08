@@ -241,14 +241,14 @@ define(["alertify", "element", "validate", "transition", "keys"], function (Aler
             dialog.cover.className = clsCoverShow;
             dialog.el.className    = clsElShow;
 
-            TweenLite.to(dialog.cover, speeds.fast, {
+            TweenLite.to(dialog.cover, speeds.fast/1000, {
                 css:{
                     opacity:1
                 },
                 ease : easing.gsap.origin
             });
 
-            TweenLite.to(dialog.el, speeds.fast, {
+            TweenLite.to(dialog.el, speeds.fast/1000, {
                 css :{
                     opacity:1,
                     y:0
