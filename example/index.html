@@ -385,14 +385,16 @@
 
         this.easing = {
             gsap: {
-                snap: Elastic.easeOut,
-                origin: Cubic.easeInOut,
-                heavy: Quad.easeOut
+                snap    : Elastic.easeOut,
+                origin  : Cubic.easeInOut,
+                heavy   : Quad.easeOut,
+                slip    : Back.easeOut
             },
             d3: {
-                snap: 'elastic-in',
-                origin: 'cubic-in-out',
-                heavy: 'quad-in'
+                snap    : 'elastic-in',
+                origin  : 'cubic-in-out',
+                heavy   : 'quad-in',
+                slip    : 'back-in'
             }
         };
     </script>

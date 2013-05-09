@@ -507,14 +507,14 @@ var Dialog = (function () {
             dialog.cover.className = clsCoverShow;
             dialog.el.className    = clsElShow;
 
-            TweenLite.to(dialog.cover, speeds.fast, {
+            TweenLite.to(dialog.cover, speeds.fast/1000, {
                 css:{
                     opacity:1
                 },
                 ease : easing.gsap.origin
             });
 
-            TweenLite.to(dialog.el, speeds.fast, {
+            TweenLite.to(dialog.el, speeds.fast/1000, {
                 css :{
                     opacity:1,
                     y:0
@@ -728,15 +728,17 @@ var Log = (function () {
             this.fn = function() {
                 onAnimationEnd.call(that);
             };
-            TweenLite.to(this.el, speeds.fast/1000, {css:{
-                    opacity : 0,
-                    right   : this.el.offsetWidth*-1,
+            TweenLite.to(this.el, speeds.fast/1000, {
+                css:{
+                    opacity   : 0,
+                    right     : this.el.offsetWidth*-1,
                     rotation  : -8,
-                    y         : 12
+                    y         : 20
                 },
                 onComplete : this.fn,
-                ease : easing.gsap.origin
-            })
+                ease : easing.gsap.heavy
+                }
+            )
 
         }
     };
@@ -780,8 +782,9 @@ var Log = (function () {
                 opacity : 1,
                 right   : 0
             },
-            ease : easing.gsap.snap
-        });
+            ease : easing.gsap.slip
+            }
+        );
 
         //this.el.className = clsShow + " " + prefix + "-" + this.type;
         startTimer.call(this);

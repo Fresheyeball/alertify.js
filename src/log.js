@@ -87,13 +87,13 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
             };
             TweenLite.to(this.el, speeds.fast/1000, {
                 css:{
-                    opacity : 0,
-                    right   : this.el.offsetWidth*-1,
+                    opacity   : 0,
+                    right     : this.el.offsetWidth*-1,
                     rotation  : -8,
-                    y         : 12
+                    y         : 20
                 },
                 onComplete : this.fn,
-                ease : easing.gsap.origin
+                ease : easing.gsap.heavy
                 }
             )
 
@@ -139,7 +139,7 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
                 opacity : 1,
                 right   : 0
             },
-            ease : easing.gsap.snap
+            ease : easing.gsap.slip
             }
         );
 
