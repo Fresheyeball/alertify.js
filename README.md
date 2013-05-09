@@ -1,5 +1,7 @@
 [![build status](https://secure.travis-ci.org/fabien-d/alertify.js.png)](http://travis-ci.org/fabien-d/alertify.js)
 
+This fork purges css3 transitions in favor of [GreenSock](http://www.greensock.com/gsap-js/) animations. It also currently consumes project specific config (this will be removed so you can happily use custom gsap).
+
 # alertify.js - browser dialogs never looked so good
 
 Checkout the [getting started guide](https://github.com/fabien-d/alertify.js/wiki/Getting-Started) to get up and running with alertify.js.
