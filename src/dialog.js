@@ -1,4 +1,4 @@
-define(["alertify", "element", "validate", "transition", "keys"], function (Alertify, element, validate, transition, keys) {
+define(["alertify", "element", "validate", "keys"], function (Alertify, element, validate, keys) {
     "use strict";
 
     var dialog,
@@ -122,9 +122,6 @@ define(["alertify", "element", "validate", "transition", "keys"], function (Aler
             if (controls.form) {
                 Alertify.on(controls.form, "submit", onBtnOK);
             }
-            if (!transition.supported) {
-                setFocus();
-            }
         };
 
         /**
@@ -239,8 +236,6 @@ define(["alertify", "element", "validate", "transition", "keys"], function (Aler
             var item = queue[0];
 
             isOpen = true;
-
-            console.log('shockazooloo', clsCoverShow, clsElShow);
 
             dialog.el.innerHTML    = build(item);
             //dialog.cover.className = clsCoverShow;

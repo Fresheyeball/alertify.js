@@ -78,7 +78,6 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
      * @return {undefined}
      */
     Log.prototype.close = function () {
-        console.log('close fired');
         var that = this;
         if (typeof this.el !== "undefined" && this.el.parentNode === this.parent) {
 
