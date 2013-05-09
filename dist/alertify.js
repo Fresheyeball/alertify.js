@@ -213,46 +213,6 @@ var element = (function () {
 
     return element;
 }());
-var transition = (function () {
-    
-
-    var transition;
-
-    /**
-     * Transition
-     * Determines if current browser supports CSS transitions
-     * And if so, assigns the proper transition event
-     *
-     * @return {Object}
-     */
-    transition = function () {
-        var t,
-            type,
-            supported   = false,
-            el          = element.create("fakeelement"),
-            transitions = {
-                "WebkitTransition" : "webkitTransitionEnd",
-                "MozTransition"    : "transitionend",
-                "OTransition"      : "otransitionend",
-                "transition"       : "transitionend"
-            };
-
-        for (t in transitions) {
-            if (el.style[t] !== undefined) {
-                type      = transitions[t];
-                supported = true;
-                break;
-            }
-        }
-
-        return {
-            type      : type,
-            supported : supported
-        };
-    };
-
-    return transition();
-}());
 var keys = (function () {
     
 
@@ -267,8 +227,7 @@ var keys = (function () {
 var Dialog = (function () {
     
 
-    var dialog,
-        _dialog = {};
+    var dialog = {};
 
     var Dialog = function () {
         var controls     = {},
@@ -278,12 +237,9 @@ var Dialog = (function () {
             tpl          = {},
             prefixEl     = Alertify._prefix + "-dialog",
             prefixCover  = Alertify._prefix + "-cover",
-            clsElShow    = prefixEl + " is-" + prefixEl + "-showing",
             clsElHide    = prefixEl + " is-" + prefixEl + "-hidden",
-            clsCoverShow = prefixCover + " is-" + prefixCover + "-showing",
             clsCoverHide = prefixCover + " is-" + prefixCover + "-hidden",
             elCallee,
-            $,
             appendBtns,
             addListeners,
             build,
@@ -359,7 +315,7 @@ var Dialog = (function () {
             };
 
             // reset focus to first item in the dialog
-            onBtnResetFocus = function (event) {
+            onBtnResetFocus = function () {
                 if (controls.input) {
                     controls.input.focus();
                 } else if (controls.cancel) {
@@ -387,9 +343,6 @@ var Dialog = (function () {
             // bind form submit
             if (controls.form) {
                 Alertify.on(controls.form, "submit", onBtnOK);
-            }
-            if (!transition.supported) {
-                setFocus();
             }
         };
 
@@ -506,8 +459,6 @@ var Dialog = (function () {
 
             isOpen = true;
 
-            console.log('shockazooloo', clsCoverShow, clsElShow);
-
             dialog.el.innerHTML    = build(item);
             //dialog.cover.className = clsCoverShow;
             //dialog.el.className    = clsElShow;
@@ -529,7 +480,7 @@ var Dialog = (function () {
                 ease : easing.gsap.slip,
                 onComplete : function(){
                     if(!fromQueue){
-                        setFocus()
+                        setFocus();
                     }
                 }
             });
@@ -537,7 +488,7 @@ var Dialog = (function () {
             controls.reset  = Alertify.get("alertify-resetFocus");
             controls.ok     = Alertify.get("alertify-ok")     || undefined;
             controls.cancel = Alertify.get("alertify-cancel") || undefined;
-            controls.focus  = (dialog.buttonFocus === "cancel" && controls.cancel) ? controls.cancel : ((dialog.buttonFocus === "none") ? Alertify.get("alertify-noneFocus") : controls.ok),
+            controls.focus  = (dialog.buttonFocus === "cancel" && controls.cancel) ? controls.cancel : ((dialog.buttonFocus === "none") ? Alertify.get("alertify-noneFocus") : controls.ok);
             controls.input  = Alertify.get("alertify-text")   || undefined;
             controls.form   = Alertify.get("alertify-form")   || undefined;
 
@@ -728,7 +679,6 @@ var Log = (function () {
      * @return {undefined}
      */
     Log.prototype.close = function () {
-        console.log('close fired');
         var that = this;
         if (typeof this.el !== "undefined" && this.el.parentNode === this.parent) {
 
@@ -745,7 +695,7 @@ var Log = (function () {
                 onComplete : this.fn,
                 ease : easing.gsap.heavy
                 }
-            )
+            );
 
         }
     };

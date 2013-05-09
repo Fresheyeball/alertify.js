@@ -1,8 +1,7 @@
 define(["alertify", "element", "validate", "keys"], function (Alertify, element, validate, keys) {
     "use strict";
 
-    var dialog,
-        dialog = {};
+    var dialog = {};
 
     var Dialog = function () {
         var controls     = {},
@@ -12,12 +11,9 @@ define(["alertify", "element", "validate", "keys"], function (Alertify, element,
             tpl          = {},
             prefixEl     = Alertify._prefix + "-dialog",
             prefixCover  = Alertify._prefix + "-cover",
-            clsElShow    = prefixEl + " is-" + prefixEl + "-showing",
             clsElHide    = prefixEl + " is-" + prefixEl + "-hidden",
-            clsCoverShow = prefixCover + " is-" + prefixCover + "-showing",
             clsCoverHide = prefixCover + " is-" + prefixCover + "-hidden",
             elCallee,
-            $,
             appendBtns,
             addListeners,
             build,
@@ -93,7 +89,7 @@ define(["alertify", "element", "validate", "keys"], function (Alertify, element,
             };
 
             // reset focus to first item in the dialog
-            onBtnResetFocus = function (event) {
+            onBtnResetFocus = function () {
                 if (controls.input) {
                     controls.input.focus();
                 } else if (controls.cancel) {
@@ -258,7 +254,7 @@ define(["alertify", "element", "validate", "keys"], function (Alertify, element,
                 ease : easing.gsap.slip,
                 onComplete : function(){
                     if(!fromQueue){
-                        setFocus()
+                        setFocus();
                     }
                 }
             });
@@ -266,7 +262,7 @@ define(["alertify", "element", "validate", "keys"], function (Alertify, element,
             controls.reset  = Alertify.get("alertify-resetFocus");
             controls.ok     = Alertify.get("alertify-ok")     || undefined;
             controls.cancel = Alertify.get("alertify-cancel") || undefined;
-            controls.focus  = (dialog.buttonFocus === "cancel" && controls.cancel) ? controls.cancel : ((dialog.buttonFocus === "none") ? Alertify.get("alertify-noneFocus") : controls.ok),
+            controls.focus  = (dialog.buttonFocus === "cancel" && controls.cancel) ? controls.cancel : ((dialog.buttonFocus === "none") ? Alertify.get("alertify-noneFocus") : controls.ok);
             controls.input  = Alertify.get("alertify-text")   || undefined;
             controls.form   = Alertify.get("alertify-form")   || undefined;
 

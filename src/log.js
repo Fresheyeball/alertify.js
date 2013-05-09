@@ -94,7 +94,7 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
                 onComplete : this.fn,
                 ease : easing.gsap.heavy
                 }
-            )
+            );
 
         }
     };
