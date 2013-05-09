@@ -2,7 +2,7 @@ define(["alertify", "element", "validate", "transition", "keys"], function (Aler
     "use strict";
 
     var dialog,
-        _dialog = {};
+        dialog = {};
 
     var Dialog = function () {
         var controls     = {},
@@ -190,24 +190,29 @@ define(["alertify", "element", "validate", "transition", "keys"], function (Aler
         };
 
         hide = function () {
-            var transitionDone;
             queue.splice(0,1);
             if (queue.length > 0) {
                 open(true);
             } else {
                 isOpen = false;
-                transitionDone = function (event) {
-                    event.stopPropagation();
-                    //this.className += " alertify-isHidden";
-                    Alertify.off(this, transition.type, transitionDone);
-                };
-                if (transition.supported) {
-                    Alertify.on(dialog.el, transition.type, transitionDone);
-                    dialog.el.className = clsElHide;
-                } else {
-                    dialog.el.className = clsElHide;
-                }
+                dialog.el.className = clsElHide;
                 dialog.cover.className  = clsCoverHide;
+                TweenLite.to(dialog.cover, speeds.fast/1000, {
+                    css : {
+                        opacity : 0
+                    },
+                    onComplete : function(){
+                        dialog.cover.style.display = 'none';
+                    }
+                });
+                TweenLite.to(dialog.el, speeds.fast/1000, {
+                    css : {
+                        y           : -150,
+                        opacity     : 0,
+                        rotation    : -8
+                    },
+                    ease : easing.gsap.origin
+                });
                 elCallee.focus();
             }
         };
@@ -238,9 +243,10 @@ define(["alertify", "element", "validate", "transition", "keys"], function (Aler
             console.log('shockazooloo', clsCoverShow, clsElShow);
 
             dialog.el.innerHTML    = build(item);
-            dialog.cover.className = clsCoverShow;
-            dialog.el.className    = clsElShow;
+            //dialog.cover.className = clsCoverShow;
+            //dialog.el.className    = clsElShow;
 
+            dialog.cover.style.display = 'block';
             TweenLite.to(dialog.cover, speeds.fast/1000, {
                 css:{
                     opacity:1
@@ -250,10 +256,11 @@ define(["alertify", "element", "validate", "transition", "keys"], function (Aler
 
             TweenLite.to(dialog.el, speeds.fast/1000, {
                 css :{
-                    opacity:1,
-                    y:0
+                    opacity     : 1,
+                    y           : 0,
+                    rotation    : 0
                 },
-                ease : easing.gsap.heavy,
+                ease : easing.gsap.slip,
                 onComplete : function(){
                     if(!fromQueue){
                         setFocus()

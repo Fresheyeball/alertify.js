@@ -48,7 +48,7 @@
 .is-alertify-dialog-hidden {
     opacity: 0;
     display: none;
-    @include prefix(transform, translate(0,-150px), true, true, true, true, true);
+    @include prefix(transform, translate(0,-150px) rotate(-8deg), true, true, true, true, true);
 }
     // overwrite display: none; for everything except IE6-8
     :root *> .is-alertify-dialog-hidden { display: block; }

@@ -49,11 +49,11 @@
 .is-alertify-dialog-hidden {
   opacity: 0;
   display: none;
-  -webkit-transform: translate(0, -150px);
-  -moz-transform: translate(0, -150px);
-  -ms-transform: translate(0, -150px);
-  -o-transform: translate(0, -150px);
-  transform: translate(0, -150px); }
+  -webkit-transform: translate(0, -150px) rotate(-8deg);
+  -moz-transform: translate(0, -150px) rotate(-8deg);
+  -ms-transform: translate(0, -150px) rotate(-8deg);
+  -o-transform: translate(0, -150px) rotate(-8deg);
+  transform: translate(0, -150px) rotate(-8deg); }
 
 :root * > .is-alertify-dialog-hidden {
   display: block; }
