@@ -190,22 +190,7 @@ define(["alertify", "element", "validate", "keys"], function (Alertify, element,
                 isOpen = false;
                 dialog.el.className = clsElHide;
                 dialog.cover.className  = clsCoverHide;
-                TweenLite.to(dialog.cover, speeds.fast/1000, {
-                    css : {
-                        opacity : 0
-                    },
-                    onComplete : function(){
-                        dialog.cover.style.display = 'none';
-                    }
-                });
-                TweenLite.to(dialog.el, speeds.fast/1000, {
-                    css : {
-                        y           : -150,
-                        opacity     : 0,
-                        rotation    : -8
-                    },
-                    ease : easing.gsap.origin
-                });
+                Alertify.dialogHide(dialog);
                 elCallee.focus();
             }
         };
@@ -234,28 +219,10 @@ define(["alertify", "element", "validate", "keys"], function (Alertify, element,
             isOpen = true;
 
             dialog.el.innerHTML    = build(item);
-            //dialog.cover.className = clsCoverShow;
-            //dialog.el.className    = clsElShow;
 
-            dialog.cover.style.display = 'block';
-            TweenLite.to(dialog.cover, speeds.fast/1000, {
-                css:{
-                    opacity:1
-                },
-                ease : easing.gsap.origin
-            });
-
-            TweenLite.to(dialog.el, speeds.fast/1000, {
-                css :{
-                    opacity     : 1,
-                    y           : 0,
-                    rotation    : 0
-                },
-                ease : easing.gsap.slip,
-                onComplete : function(){
-                    if(!fromQueue){
-                        setFocus();
-                    }
+            Alertify.dialogShow(dialog,function(){
+                if(!fromQueue){
+                    setFocus();
                 }
             });
 

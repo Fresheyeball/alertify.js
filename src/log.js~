@@ -126,6 +126,7 @@ define(["alertify", "validate", "element"], function (Alertify, validate, elemen
 
         Alertify.logShow(this.el);
 
+        //this.el.className = clsShow + " " + prefix + "-" + this.type;
         startTimer.call(this);
     };
 

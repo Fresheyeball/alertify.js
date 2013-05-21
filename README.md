@@ -1,6 +1,15 @@
 [![build status](https://secure.travis-ci.org/fabien-d/alertify.js.png)](http://travis-ci.org/fabien-d/alertify.js)
 
-This fork purges css3 transitions in favor of [GreenSock](http://www.greensock.com/gsap-js/) animations. It also currently consumes project specific config (this will be removed so you can happily use custom gsap).
+This fork moves transitions/animation out of the source code so that developers can configure custom animations for their needs. It also purges the css3 transitions.
+
+North of Alertify, simply include the following:
+
+     Alerify.logShow    = function(element){             //... log show animation here
+     Alerify.logHide    = function(element, callback){   //... log hide animation here
+     Alerify.dialogShow = function(dialog, callback){    //... dialog show animation here
+     Alerify.dialogHide = function(dialog){              //... dialog hide animation here
+
+This was done originally to purge css3 transitions in favor of [GreenSock](http://www.greensock.com/gsap-js/) animations, which are more flexible and performant. However you could use any type of animation you want, or even use your won css3 animations if thats your thing.   
 
 # alertify.js - browser dialogs never looked so good
 
